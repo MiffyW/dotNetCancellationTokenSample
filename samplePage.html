@@ -1,0 +1,34 @@
+
+
+<script>
+
+// var xhr = $.get("https://localhost:44356/slowtest", function(data){
+//   //show the data
+//   document.getElementById("label").innerHTML = data;
+// });
+var xhrobj = new XMLHttpRequest();
+function sendReq(){
+  xhrobj.onreadystatechange = function() {
+    if (xhrobj.readyState == XMLHttpRequest.DONE) {
+        // alert(xhr.responseText);
+        document.getElementById("label").innerHTML = xhrobj.responseText;
+    }
+  }
+  xhrobj.open('GET', "https://localhost:44356/slowtest");
+  xhrobj.send();
+}
+
+//If the user navigates away from this page
+function cancelReq(){
+  xhrobj.abort();
+}
+
+</script>
+<head>
+</head>
+
+<body>
+    <div id="label">original</div>
+    <button onclick="sendReq()">send</button>
+    <button onclick="cancelReq()">cancel</button>
+</body>
